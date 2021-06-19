@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <title></title>
+
+</head>
+
+<body>
+
+    <div id="sidebar">
+
+        <h1>Canvas Size:</h1>
+
+        <input oninput="resizeCanvas()" id="width_box">
+
+        <input oninput="resizeCanvas()" id="height_box">
+
+        <h1>Cell Size:</h1>
+
+        <input id="cell_size">
+
+        <h1>Cell Border Width:</h1>
+
+        <input id="cell_border_width">
+
+    </div>
+    
+    <canvas id="canvas"></canvas>
+
+    <script src="control_script.js"></script>
+    <script src="graph.js"></script>
+
+</body>
+
+</html>
+
+<link rel="stylesheet" href="stylesheet.css">
