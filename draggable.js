@@ -1,65 +1,3 @@
-<!DOCTYPE html>
-<html lang="">
-
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
-    <title></title>
-
-</head>
-
-<body>
-
-    <div id="sidebar">
-
-        <h1 style="display: inline;">Canvas Size:</h1>
-
-        <input id="width_box">
-
-        <input id="height_box">
-
-        <br>
-        <br>
-
-        <h1 style="display: inline;">Columns:</h1>
-
-        <input id="columns">
-
-        <br>
-        <br>
-
-        <h1 style="display: inline;">Rows:</h1>
-
-        <input id="rows">
-
-        <br>
-        <br>
-
-        <h1 style="display: inline;">Cell Border Width:</h1>
-
-        <input id="cell_border_width">
-
-        <br>
-        <br>
-
-        <button onClick="drawGrid()" id="redraw">Redraw</button>
-
-    </div>
-    
-    <!--<canvas id="canvas"></canvas>-->
-
-</body>
-
-<script src="control_script.js"></script>
-
-</html>
-
-<link rel="stylesheet" href="stylesheet.css">
-
-<script>
-
 // Make the DIV element draggable:
 //dragElement(document.getElementById("sidebar"));
 
@@ -70,7 +8,7 @@ function dragElement(elmnt) {
     document.getElementById(elmnt.id + "sidebar").onmousedown = dragMouseDown;
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
+    elmnt.oncontextmenu = dragMouseDown;
   }
 
   function dragMouseDown(e) {
@@ -103,5 +41,3 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-    
-</script>
