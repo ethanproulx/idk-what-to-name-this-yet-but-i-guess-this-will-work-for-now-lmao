@@ -7,8 +7,8 @@ var ctx = canvas.getContext("2d");
 //Sets default values for the sidebar
 document.getElementById("width_box").value         = 800;
 document.getElementById("height_box").value        = 800;
-document.getElementById("columns").value           = 10;
-document.getElementById("rows").value              = 10;
+document.getElementById("columns").value           = 20;
+document.getElementById("rows").value              = 20;
 document.getElementById("cell_border_width").value = 1;
 document.getElementById("cell_size_diff").value    = 0;
 document.getElementById("dead_color").value        = "#FFFFFF";
@@ -27,23 +27,27 @@ function drawGrid() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     //these variables set all the sizes and dimensions needed later
-    var width = document.getElementById("width_box").value;
-    var height = document.getElementById("height_box").value;
+    let width = document.getElementById("width_box").value;
+    let height = document.getElementById("height_box").value;
 
-    var columns = document.getElementById("columns").value;
-    var rows = document.getElementById("rows").value;
+    let cell_sparcity = 2;
 
-    var border_width = document.getElementById("cell_border_width").value;
+    let columns = [document.getElementById("columns").value];
+    let rows = [document.getElementById("rows").value];
 
-    var cell_width = width / columns;
-    var cell_height = height / rows;
+    let border_width = document.getElementById("cell_border_width").value;
 
-    var cell_diff = document.getElementById("cell_size_diff").value;
+    let cell_width = width / columns;
+    let cell_height = height / rows;
+
+    let cell_diff = document.getElementById("cell_size_diff").value;
 
     var cell_dead = document.getElementById("dead_color").value;
     var cell_alive = document.getElementById("alive_color").value;
 
-    var gridCoords = [];
+    let gridCoords = [];
+
+    let state = make2DArray(20, 20);
 
     canvas.width = width;
     canvas.height = height;
@@ -77,11 +81,6 @@ function drawGrid() {
             ctx.moveTo(0,(r * cell_height) + cell_height);
             ctx.lineTo(width, (r * cell_height) + cell_height);
             ctx.stroke();
-
-            var x = (cd * cell_width) - (cell_width / 2);
-            var y = (rd * cell_height) - (cell_height / 2);
-
-            gridCoords.push(new Array(x,y));
             
         }
         
@@ -104,19 +103,58 @@ function drawGrid() {
 
     //This for loop is where the code randomly places a couple alive cells
 
-    var state = make2DArray(columns,rows);
+    var cellCount = getRandomValue((columns * rows) * 0.1,(columns * rows) * 0.8);
+    console.log(cellCount);
 
     for(var i = 0;i < state.length;i++) {
 
         for(var j = 0;j < state.length;j++) {
 
-            state[i][j] = Math.round(Math.random());
+            var sparce_rand = Math.floor(Math.random() * (cell_sparcity + 1));
 
+            if (sparce_rand = 1) {
+
+                if(c <= cellCount){
+                
+                    state[Math.floor(Math.random() * columns)][Math.floor(Math.random() * rows)] = 0;
+    
+                }
+
+            }
+            
         }
 
     }
 
-    console.log(state);
+    var counter = 0;
+
+    for(var i = 0;i < columns;i++) {
+
+        for(var j = 0;j < rows;j++) {
+
+            ctx.beginPath();
+
+            var tempState = state[i];
+            tempState = tempState[j];
+            
+            if(tempState == 0) {
+
+                ctx.fillStyle = "white";
+
+            } else {
+
+                ctx.fillStyle = "black";
+
+            }
+
+            ctx.fillRect(gridCoords[counter][0],gridCoords[counter][1],cell_width,cell_height);
+            ctx.stroke();
+
+            counter++;
+    
+        }
+
+    }
 
 }
 
@@ -128,17 +166,16 @@ function getRandomValue(min, max) {
 
 }
 
-function make2DArray(columns, rows) {
+function make2DArray(col, rows) {
 
-    var arr = new Array(columns);
+    var arr = new Array(arguments[0]);
 
-    for(var i = 0;i < arr.length;i++) {
+    for(var g = 0;g < arr.length;g++) {
 
-        arr[i] = new Array(rows);
+        arr[g] = new Array(arguments[1]);
 
     }
 
-    console.log(arr);
     return arr;
 
 }
