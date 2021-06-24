@@ -7,8 +7,8 @@ var ctx = canvas.getContext("2d");
 //Sets default values for the sidebar
 document.getElementById("width_box").value         = 800;
 document.getElementById("height_box").value        = 800;
-document.getElementById("columns").value           = 10;
-document.getElementById("rows").value              = 10;
+document.getElementById("columns").value           = 40;
+document.getElementById("rows").value              = 40;
 document.getElementById("cell_border_width").value = 1;
 document.getElementById("cell_size_diff").value    = 0;
 document.getElementById("dead_color").value        = "#FFFFFF";
@@ -43,8 +43,6 @@ function drawGrid() {
     var cell_dead = document.getElementById("dead_color").value;
     var cell_alive = document.getElementById("alive_color").value;
 
-    var gridCoords = [];
-
     canvas.width = width;
     canvas.height = height;
 
@@ -71,30 +69,27 @@ function drawGrid() {
         ctx.moveTo((c * cell_width) + cell_width,0);
         ctx.lineTo((c * cell_width) + cell_width, height);
         ctx.stroke();
-
-        for(var r = 0;r < rows;r++) {
-
-            ctx.moveTo(0,(r * cell_height) + cell_height);
-            ctx.lineTo(width, (r * cell_height) + cell_height);
-            ctx.stroke();
-
-            var x = (cd * cell_width) - (cell_width / 2);
-            var y = (rd * cell_height) - (cell_height / 2);
-
-            gridCoords.push(new Array(x,y));
-            
-        }
         
 
     }
 
+    for(var r = 0;r < rows;r++) {
+
+        ctx.moveTo(0,(r * cell_height) + cell_height);
+        ctx.lineTo(width, (r * cell_height) + cell_height);
+        ctx.stroke();
+        
+    }
+
     //the below code calculates the coordinates to draw rectangles later in the code
+    var gridCoords = [];
+
     for(var cd = 0;cd < columns;cd++) {
 
         for(var rd = 0;rd < rows;rd++) {
 
-            var x = (cd * cell_width);
-            var y = (rd * cell_height);
+            var x = (cd * cell_width) - (cell_width / 2);
+            var y = (rd * cell_height) - (cell_height / 2);
 
             gridCoords.push(new Array(x,y));
 
@@ -103,42 +98,11 @@ function drawGrid() {
     }
 
     //This for loop is where the code randomly places a couple alive cells
+    for(var i = 0;i < gridCoords.length;i++) {
 
-    var state = make2DArray(columns,rows);
-
-    for(var i = 0;i < state.length;i++) {
-
-        for(var j = 0;j < state.length;j++) {
-
-            state[i][j] = Math.round(Math.random());
-
-        }
+        
 
     }
 
-    console.log(state);
-
 }
 
-function getRandomValue(min, max) {
-
-    var rand = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    return rand;
-
-}
-
-function make2DArray(columns, rows) {
-
-    var arr = new Array(columns);
-
-    for(var i = 0;i < arr.length;i++) {
-
-        arr[i] = new Array(rows);
-
-    }
-
-    console.log(arr);
-    return arr;
-
-}

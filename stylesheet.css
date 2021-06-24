@@ -13,12 +13,44 @@ h1, h2 {
 
 body {
 
-    background: linear-gradient(to bottom right, #000099 -7%, #ff0000 133%);
+    animation: gradient 16s linear infinite;
+    animation-direction: alternate;
     height: 100%;
     margin: 30;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background: linear-gradient(45deg, #d16ba5, #1344d8);
+    background-size: 300% 300%;
 
+    -webkit-animation: BackgroundGradient 10s ease infinite;
+    -moz-animation: BackgroundGradient 10s ease infinite;
+    -o-animation: BackgroundGradient 10s ease infinite;
+    animation: BackgroundGradient 10s ease infinite;
+
+}
+
+@-webkit-keyframes BackgroundGradient {
+    0%{background-position:0% 77%}
+    50%{background-position:100% 24%}
+    100%{background-position:0% 77%}
+}
+
+@-moz-keyframes BackgroundGradient {
+    0%{background-position:0% 77%}
+    50%{background-position:100% 24%}
+    100%{background-position:0% 77%}
+}
+
+@-o-keyframes BackgroundGradient {
+    0%{background-position:0% 77%}
+    50%{background-position:100% 24%}
+    100%{background-position:0% 77%}
+}
+
+@keyframes BackgroundGradient {
+    0%{background-position:0% 77%}
+    50%{background-position:100% 24%}
+    100%{background-position:0% 77%}
 }
 
 #canvas {
@@ -31,11 +63,15 @@ body {
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     z-index: -1;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-
+    box-shadow: rgba(0, 0, 0, 0.75) 0px 22px 70px 4px;
 }
 
-#width_box,#height_box,#cell_border_width,#columns,#rows {
+#width_box,
+#height_box,
+#cell_border_width,
+#columns,
+#rows,
+#cell_size_diff {
 
     width: 25px;
 
@@ -53,7 +89,6 @@ body {
     background-color: rgba(0,0,0,0.5);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     position: absolute;
-    z-index: 9;
     cursor: move;
     z-index: 10;
     margin: 10px;
@@ -61,11 +96,13 @@ body {
 }
 
 #redraw{
+
     height:20px; 
     width:100px; 
     margin: -20px -50px; 
     position:relative;
     top:50%; 
     left:50%;
+    
 }
 
